@@ -1,6 +1,5 @@
 <template>
     <div class="container mx-auto p-4">
-      <!-- Filter Section with Bootstrap & Tailwind -->
       <div class="row g-4 mb-4">
         <div class="col-md-6 col-lg-3">
           <label class="form-label block text-lg font-semibold">Search</label>
@@ -40,8 +39,6 @@
           />
         </div>
       </div>
-  
-      <!-- Sort Options -->
       <div class="mb-4">
         <div class="flex items-center gap-4">
           <div class="flex flex-col md:flex-row gap-2">
@@ -59,8 +56,6 @@
           </button>
         </div>
       </div>
-  
-      <!-- Task Table -->
       <table class="table table-bordered mt-3">
         <thead>
           <tr>
@@ -86,8 +81,6 @@
           </tr>
         </tbody>
       </table>
-  
-      <!-- Pagination Controls -->
       <div class="pagination-controls text-center mt-4">
         <button @click="goToPage(currentPage - 1)" :disabled="currentPage === 1" class="btn btn-secondary">Previous</button>
         <span class="mx-3">Page {{ currentPage }} of {{ totalPages }}</span>
@@ -98,7 +91,7 @@
   
   <script>
   export default {
-    props: ["tasks"], // Receive the list of tasks from the parent
+    props: ["tasks"], 
   
     data() {
       return {
@@ -106,39 +99,33 @@
         selectedPriority: "",
         selectedStatus: "",
         selectedDate: "",
-        sortBy: "title", // Default sort by title
-        sortOrder: "asc", // Default ascending order
+        sortBy: "title", 
+        sortOrder: "asc", 
         currentPage: 1,
         tasksPerPage: 5,
       };
     },
   
     computed: {
-      // Filtered tasks based on search term, selected filters (including new status and date filter)
       filteredTasks() {
         return this.tasks.filter(task => {
-          // Search term filter (Title, Description, Priority, Status, Due Date)
+          
           const matchesSearch =
             (task.title.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
             task.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            task.priority.toLowerCase().includes(this.searchTerm.toLowerCase()) || // Include priority
-            task.status.toLowerCase().includes(this.searchTerm.toLowerCase()) || // Include status
-            task.dueDate.toLowerCase().includes(this.searchTerm.toLowerCase())); // Include due date
+            task.priority.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
+            task.status.toLowerCase().includes(this.searchTerm.toLowerCase()) || 
+            task.dueDate.toLowerCase().includes(this.searchTerm.toLowerCase())); 
   
-          // Priority filter
           const matchesPriority = this.selectedPriority ? task.priority === this.selectedPriority : true;
           
-          // Status filter
           const matchesStatus = this.selectedStatus ? task.status === this.selectedStatus : true;
-  
-          // Due Date filter
           const matchesDueDate = this.selectedDate ? task.dueDate === this.selectedDate : true;
   
           return matchesSearch && matchesPriority && matchesStatus && matchesDueDate;
         });
       },
   
-      // Sorted tasks based on selected sorting option
       sortedTasks() {
         let sorted = [...this.filteredTasks];
         if (this.sortBy === "title") {
@@ -150,7 +137,6 @@
           sorted.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
         }
   
-        // Reverse order if descending
         if (this.sortOrder === "desc") {
           sorted.reverse();
         }
@@ -158,7 +144,7 @@
         return sorted;
       },
   
-      // Paginated tasks
+
       paginatedTasks() {
         const start = (this.currentPage - 1) * this.tasksPerPage;
         const end = start + this.tasksPerPage;
@@ -171,19 +157,16 @@
     },
   
     methods: {
-      // Change the current page
       goToPage(page) {
         if (page >= 1 && page <= this.totalPages) {
           this.currentPage = page;
         }
       },
   
-      // Toggle sort order between ascending and descending
       toggleSortOrder() {
         this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc";
       },
   
-      // Highlight search term in task title or description
       highlightSearchTerm(text) {
         if (!this.searchTerm) return text;
         const regex = new RegExp(`(${this.searchTerm})`, "gi");

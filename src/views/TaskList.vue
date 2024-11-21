@@ -7,7 +7,7 @@
       @edit-task="openEditModal"
       @delete-task="deleteTask"
     />
-    <!-- Edit Task Modal -->
+  
     <div
       class="modal fade"
       id="editTaskModal"
@@ -22,7 +22,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <!-- Only show the form when selectedTask is not null -->
+           
             <form v-if="selectedTask" @submit.prevent="updateTask">
               <div class="mb-3">
                 <label for="editTitle" class="form-label">Title</label>
@@ -80,14 +80,14 @@
 <script>
 import TaskForm from "../components/TaskForm.vue";
 import TaskTable from "../components/TaskTable.vue";
-import * as bootstrap from "bootstrap"; // Import Bootstrap
+import * as bootstrap from "bootstrap"; 
 
 export default {
   components: { TaskForm, TaskTable },
   data() {
     return {
       tasks: [],
-      selectedTask: null, // Initialize selectedTask as null
+      selectedTask: null, 
     };
   },
   methods: {
@@ -115,10 +115,10 @@ export default {
         if (this.selectedTask) {
           const modalElement = document.getElementById("editTaskModal");
 
-          // Check if modal element exists to prevent the error
+         
           if (modalElement) {
             const modal = new bootstrap.Modal(modalElement);
-            modal.show();  // Open the modal after Vue finishes rendering
+            modal.show();  
           }
         }
       });
@@ -127,11 +127,11 @@ export default {
       if (this.selectedTask && this.selectedTask.id) {
         const index = this.tasks.findIndex((task) => task.id === this.selectedTask.id);
         if (index !== -1) {
-          this.tasks.splice(index, 1, this.selectedTask); // Update the task in the list
-          this.saveTasks(); // Save tasks to localStorage
+          this.tasks.splice(index, 1, this.selectedTask); 
+          this.saveTasks(); 
         }
       }
-      // Hide the modal after updating the task
+     
       const modalElement = document.getElementById("editTaskModal");
       if (modalElement) {
         const modal = bootstrap.Modal.getInstance(modalElement);
@@ -140,11 +140,11 @@ export default {
     },
   },
   mounted() {
-    this.loadTasks(); // Load tasks when the page is mounted
+    this.loadTasks(); 
   },
 };
 </script>
 
 <style scoped>
-/* Your custom styles here */
+
 </style>

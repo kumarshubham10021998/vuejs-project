@@ -1,12 +1,12 @@
 <template>
   <div>
-    <!-- Navbar -->
+   
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <!-- Brand Name -->
+     
         <a class="navbar-brand text-lg font-bold" href="#">Task Management App</a>
 
-        <!-- Toggler for Mobile View -->
+        
         <button
           class="navbar-toggler"
           type="button"
@@ -19,7 +19,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navigation Links -->
+       
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
@@ -46,7 +46,7 @@
       </div>
     </nav>
 
-    <!-- Main Content Area -->
+
     <div class="container mt-4">
       <router-view />
     </div>
@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style>
-/* Global Styles */
+
 body {
   font-family: "Arial", sans-serif;
 }

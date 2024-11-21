@@ -1,9 +1,9 @@
 <template>
     <div class="container mx-auto p-4">
-      <!-- Title -->
+   
       <h1 class="text-2xl font-bold mb-4">User List</h1>
   
-      <!-- Search Bar -->
+   
       <div class="mb-4">
         <input
           v-model="searchTerm"
@@ -13,19 +13,19 @@
         />
       </div>
   
-      <!-- Loading Spinner -->
+      
       <div v-if="isLoading" class="text-center my-4">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
   
-      <!-- Error Message -->
+      
       <div v-if="error" class="alert alert-danger text-center">
         {{ error }}
       </div>
   
-      <!-- User Table -->
+  
       <table v-if="!isLoading && !error && filteredUsers.length > 0" class="table table-bordered">
         <thead>
           <tr>
@@ -51,12 +51,12 @@
         </tbody>
       </table>
   
-      <!-- No Users Found -->
+    
       <div v-if="!isLoading && !error && filteredUsers.length === 0" class="text-center text-gray-500">
         No users found.
       </div>
   
-      <!-- User Details Modal -->
+    
       <div v-if="selectedUser" class="modal fade show" tabindex="-1" style="display: block;" role="dialog">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -87,15 +87,14 @@
   export default {
     data() {
       return {
-        users: [], // Stores the list of users
-        isLoading: false, // Loading state
-        error: null, // Error message
-        searchTerm: "", // Search term for filtering
-        selectedUser: null, // Selected user for details modal
+        users: [], 
+        isLoading: false, 
+        error: null, 
+        searchTerm: "", 
+        selectedUser: null, 
       };
     },
     computed: {
-      // Filter users by search term (Name or Email)
       filteredUsers() {
         if (!this.searchTerm) return this.users;
   
@@ -108,7 +107,7 @@
       },
     },
     methods: {
-      // Fetch users from the API
+    
       async fetchUsers() {
         this.isLoading = true;
         this.error = null;
@@ -124,17 +123,17 @@
           this.isLoading = false;
         }
       },
-      // Show user details in a modal
+   
       showUserDetails(user) {
         this.selectedUser = user;
       },
-      // Close the modal
+     
       closeModal() {
         this.selectedUser = null;
       },
     },
     mounted() {
-      // Fetch users on component mount
+      
       this.fetchUsers();
     },
   };
